@@ -30,17 +30,25 @@ const Statistics = (props) => {
     const count = props.good + props.neutral + props.bad
     const avg = (props.good * 1 + props.bad * -1)/3.0
     const positives = 100*(props.good/count)
-    return (
-        <div>
-          <Header text='statistiikka'/>
-          <p>hyvä {props.good}</p>
-          <p>neutraali {props.neutral}</p>
-          <p>huono {props.bad}</p>
-          <p>yhteensä {count}</p>
-          <p>keskiarvo {avg}</p>
-          <p>positiivisia {positives} %</p>
-        </div>
-    )
+    if (count > 0) {
+      return (
+          <div>
+            <Header text='statistiikka'/>
+            <p>hyvä {props.good}</p>
+            <p>neutraali {props.neutral}</p>
+            <p>huono {props.bad}</p>
+            <p>yhteensä {count}</p>
+            <p>keskiarvo {avg}</p>
+            <p>positiivisia {positives} %</p>
+          </div>
+      )
+    } else {
+        return(
+            <div>
+                Ei yhtään palautetta annettu
+            </div>
+        )
+    }
 }
 
 const App = (props) => {
