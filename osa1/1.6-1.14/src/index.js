@@ -34,12 +34,34 @@ const Statistics = (props) => {
       return (
           <div>
             <Header text='statistiikka'/>
-            <p>hyvä {props.good}</p>
-            <p>neutraali {props.neutral}</p>
-            <p>huono {props.bad}</p>
-            <p>yhteensä {count}</p>
-            <p>keskiarvo {avg}</p>
-            <p>positiivisia {positives} %</p>
+            <table>
+                <tbody>
+                  <tr>
+                      <td>hyvä</td>
+                      <td>{props.good}</td>
+                  </tr>
+                  <tr>
+                      <td>neutraali</td>
+                      <td>{props.neutral}</td>
+                  </tr>
+                  <tr>
+                      <td>huono</td>
+                      <td>{props.bad}</td>
+                  </tr>
+                  <tr>
+                      <td>yhteensä</td>
+                      <td>{count}</td>
+                  </tr>
+                  <tr>
+                      <td>keskiarvo</td>
+                      <td>{avg}</td>
+                  </tr>
+                  <tr>
+                      <td>positiivisia</td>
+                      <td>{positives} %</td>
+                  </tr>
+                </tbody>
+            </table>
           </div>
       )
     } else {
