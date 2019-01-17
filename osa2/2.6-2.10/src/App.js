@@ -1,13 +1,18 @@
 import React, { useState } from 'react'
+import PersonForm from './components/PersonForm'
+import Filter from './components/Filter'
+import Persons from './components/Persons'
 
 const App = () => {
-  const [ persons, setPersons] = useState([
-    { name: 'Arto Hellas',
-      number: '040-123456'
-    }
-  ]) 
+  const [persons, setPersons] = useState([
+    { name: 'Arto Hellas', number: '040-123456' },
+    { name: 'Martti Tienari', number: '040-123456' },
+    { name: 'Arto Järvinen', number: '040-123456' },
+    { name: 'Lea Kutvonen', number: '040-123456' }
+  ])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber] = useState('')
+  const [ condition, setCondition] = useState('')
 
   const addName = (event) => {
     event.preventDefault()
@@ -32,28 +37,18 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
-  const rows = () => persons.map(person => 
-      <p>
-        {person.name} {person.number}
-      </p>
-    )
+  const handleCondition = (event) => {
+    setCondition(event.target.value)
+  }
 
   return (
     <div>
       <h2>Puhelinluettelo</h2>
-      <form onSubmit={addName}>
-        <div>
-          nimi: <input value={newName} onChange={handleNameChange}/>
-        </div>
-        <div>
-          numero: <input value={newNumber} onChange={handleNumberChange}/>
-        </div>
-        <div>
-          <button type="submit">lisää</button>
-        </div>
-      </form>
+      <Filter condition={condition} handleCondition={handleCondition}/>
+      <h2>Lisää uusi</h2>
+      <PersonForm addName={addName} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange} />
       <h2>Numerot</h2>
-      {rows()}
+      <Persons persons={persons} condition={condition}/>
     </div>
   )
 
