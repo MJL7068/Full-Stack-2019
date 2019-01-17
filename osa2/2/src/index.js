@@ -43,7 +43,7 @@ const App = () => {
         }
       ]
 
-    const rows = () => courses.map(course =>
+    const allCourses = () => courses.map(course =>
         <Course
           key={course.id}
           course={course}
@@ -53,7 +53,7 @@ const App = () => {
     return (
       <div>
         <h1>Opetusohjelma</h1>
-        {rows()}
+        {allCourses()}
       </div>
     )
   }
