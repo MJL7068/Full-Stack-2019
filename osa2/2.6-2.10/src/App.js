@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 
 const App = () => {
   const [ persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas',
+      number: '040-123456'
+    }
   ]) 
   const [ newName, setNewName ] = useState('')
+  const [ newNumber, setNewNumber] = useState('')
 
   const addName = (event) => {
     event.preventDefault()
@@ -12,17 +15,28 @@ const App = () => {
       alert(newName + ' on jo luettelossa')
     } else {
       const nameObject = {
-        name: newName
+        name: newName,
+        number: newNumber
       }
       setPersons(persons.concat(nameObject))
       setNewName('')
+      setNewNumber('')
     }
   }
 
   const handleNameChange = (event) => {
-    //console.log(event.target.value)
     setNewName(event.target.value)
   }
+
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value)
+  }
+
+  const rows = () => persons.map(person => 
+      <p>
+        {person.name} {person.number}
+      </p>
+    )
 
   return (
     <div>
@@ -32,11 +46,14 @@ const App = () => {
           nimi: <input value={newName} onChange={handleNameChange}/>
         </div>
         <div>
+          numero: <input value={newNumber} onChange={handleNumberChange}/>
+        </div>
+        <div>
           <button type="submit">lisää</button>
         </div>
       </form>
       <h2>Numerot</h2>
-      {persons[0].name}
+      {rows()}
     </div>
   )
 
