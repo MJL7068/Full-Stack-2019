@@ -1,7 +1,8 @@
 import React from 'react'
 import Country from './Country'
+import Button from './Button'
 
-const Countries = ({countries, search}) => {
+const Countries = ({countries, search, setSearch}) => {
     const countriesToShow = countries.filter(country => country.name.toUpperCase().includes(search.toUpperCase()))
     console.log(countriesToShow.length)
 
@@ -19,7 +20,7 @@ const Countries = ({countries, search}) => {
 
     if (countriesToShow.length < 10 && countriesToShow.length > 1) {
       return(
-        countriesToShow.map(country => <p key={country.name}>{country.name}</p>)
+        countriesToShow.map(country => <p key={country.name}>{country.name} <Button country={country} setSearch={setSearch}/></p>)
       )
     }
 

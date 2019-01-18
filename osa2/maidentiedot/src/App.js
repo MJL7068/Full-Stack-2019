@@ -7,7 +7,7 @@ import Countries from './components/Countries'
 
 const App = () => {
   const [countries, setCountries] = useState([])
-  const [search, setSearch] = useState('Finland')
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     axios
@@ -24,7 +24,7 @@ const App = () => {
   return (
     <div>
       <Filter search={search} handleSearch={handleSearch} />
-      <Countries countries={countries} search={search}/>
+      <Countries countries={countries} search={search} setSearch={setSearch}/>
     </div>
   )
 
