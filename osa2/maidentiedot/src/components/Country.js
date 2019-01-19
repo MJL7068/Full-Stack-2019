@@ -12,11 +12,13 @@ const Country = ({country}) => {
               capital {country.capital}<br></br>
               population {country.population}
           </p>
-          <h2>languages</h2>
-          <ul>
-              {languages()}
-          </ul>
-          <img alt='flag' width={250} height={150} src={country.flag}/>
+          <div>
+            <h2>languages</h2>
+            <ul>
+                {languages()}
+            </ul>
+            <img alt='flag' width={250} height={150} src={country.flag}/>
+          </div>
         </div>
     )
 }

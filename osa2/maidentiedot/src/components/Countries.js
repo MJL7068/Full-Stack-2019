@@ -1,10 +1,10 @@
 import React from 'react'
 import Country from './Country'
 import Button from './Button'
+import Weather from './Weather'
 
-const Countries = ({countries, search, setSearch}) => {
+const Countries = ({countries, search, setSearch, weather, setWeatherLink}) => {
     const countriesToShow = countries.filter(country => country.name.toUpperCase().includes(search.toUpperCase()))
-    console.log(countriesToShow.length)
 
     if (countriesToShow.length === 0) {
         return(
@@ -26,7 +26,10 @@ const Countries = ({countries, search, setSearch}) => {
 
     if (countriesToShow.length === 1) {
         return(
-            <Country country={countriesToShow[0]}/>
+            <div>
+              <Country country={countriesToShow[0]}/>
+              <Weather country={countriesToShow[0]} weather={weather} />
+            </div>
         )
     }
 }
