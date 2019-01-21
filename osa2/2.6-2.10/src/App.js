@@ -37,6 +37,15 @@ const App = () => {
     }
   }
 
+  const removeData = (id, name) => {
+    if (window.confirm('Poistetaanko ' + name)) {
+      personsService
+        .remove(id)
+
+      setPersons(persons.filter(person => person.id !== id))
+    }
+  }
+
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
@@ -56,7 +65,11 @@ const App = () => {
       <h2>Lisää uusi</h2>
       <PersonForm addName={addName} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange} />
       <h2>Numerot</h2>
-      <Persons persons={persons} condition={condition}/>
+      <div>
+        <ul>
+          <Persons persons={persons} condition={condition} removeData={removeData}/>
+        </ul>
+      </div>
     </div>
   )
 
