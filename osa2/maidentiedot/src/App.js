@@ -5,19 +5,8 @@ import Countries from './components/Countries'
 
 const App = () => {
   const [countries, setCountries] = useState([])
-  const [search, setSearch] = useState('Finland')
+  const [search, setSearch] = useState('')
   const [weather, setWeather] = useState([])
-  const [weatherLink, setWeatherLink] = useState('Helsinki')
-
-  /*const key = ''
-  const link = ('http://api.apixu.com/v1/current.json?key=' + key + '&q=' + weatherLink)
-  useEffect(() => {
-    axios
-      .get(link)
-      .then(response => {
-        setWeather(response.data)
-      })
-  }, [])*/
 
   useEffect(() => {
     axios
@@ -31,10 +20,24 @@ const App = () => {
     setSearch(event.target.value)
   }
 
+  const changeWeather = (capital) => {
+    const key = ''
+    useEffect(() => {
+      axios
+        .get('http://api.apixu.com/v1/current.json?key=' + key + '&q=' + capital)
+        .then(response => {
+          setWeather(response.data)
+        })
+    }, [])
+  }
+
+  alert('You need to set the key for https://www.apixu.com/ in App.js!!')
+  changeWeather('Helsinki')
+
   return (
     <div>
       <Filter search={search} handleSearch={handleSearch} />
-      <Countries countries={countries} search={search} setSearch={setSearch} weather={weather} setWeatherLink={setWeatherLink}/>
+      <Countries countries={countries} search={search} setSearch={setSearch} weather={weather} changeWeather={changeWeather} />
     </div>
   )
 

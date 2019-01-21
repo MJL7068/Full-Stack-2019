@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Weather = ({capital, weather}) => {
-
     return (
         <div>
           <h2>Weather in {capital}</h2>

@@ -3,7 +3,7 @@ import Country from './Country'
 import Button from './Button'
 import Weather from './Weather'
 
-const Countries = ({countries, search, setSearch, weather, setWeatherLink}) => {
+const Countries = ({countries, search, setSearch, weather, changeWeather}) => {
     const countriesToShow = countries.filter(country => country.name.toUpperCase().includes(search.toUpperCase()))
 
     if (countriesToShow.length === 0) {
@@ -25,10 +25,11 @@ const Countries = ({countries, search, setSearch, weather, setWeatherLink}) => {
     }
 
     if (countriesToShow.length === 1) {
+        changeWeather(countriesToShow[0].capital)
         return(
             <div>
               <Country country={countriesToShow[0]}/>
-              <Weather country={countriesToShow[0]} weather={weather} />
+              <Weather capital={countriesToShow[0].capital} weather={weather} />
             </div>
         )
     }
