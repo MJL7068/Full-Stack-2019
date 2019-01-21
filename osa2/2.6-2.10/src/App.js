@@ -20,13 +20,23 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault()
+    const nameObject = {
+      name: newName,
+      number: newNumber
+    }
+
     if (persons.map((person) => person.name).includes(newName)) {
-      alert(newName + ' on jo luettelossa')
-    } else {
-      const nameObject = {
-        name: newName,
-        number: newNumber
+      if (window.confirm(newName + ' on jo luettelossa, korvataanko vanha numero uudella?')) {
+        const id = persons.find(n => n.name === newName).id
+        personsService
+          .update(id, nameObject)
+          .then(returnedPerson => {
+            setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
+          })
+        setNewName('')
+        setNewNumber('')
       }
+    } else {
       personsService
         .create(nameObject)
         .then(returnedPerson => {
