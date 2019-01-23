@@ -3,12 +3,15 @@ import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 import Persons from './components/Persons'
 import personsService from './services/personsService'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber] = useState('')
   const [ condition, setCondition] = useState('')
+  const [notification, setNotification] = useState(null)
+  const [success, setSuccess] = useState(true)
 
   useEffect(() => {
     personsService
@@ -32,15 +35,32 @@ const App = () => {
           .update(id, nameObject)
           .then(returnedPerson => {
             setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
+
+            setNotification('Muutettiin henkilön ' + nameObject.name + ' numeroa')
+            setSuccess(true)
+
+            setTimeout(() => {
+              setNotification(null)
+            }, 5000)
           })
-        setNewName('')
-        setNewNumber('')
       }
     } else {
       personsService
         .create(nameObject)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
+
+          setNotification('Lisättiin henkilö ' + newName)
+          setSuccess(true)
+  
+          setNewName('')
+          setNewNumber('')
+  
+          setTimeout(() => {          
+            setNotification(null)
+            setSuccess(true)  
+          }, 5000)  
+
           setNewName('')
           setNewNumber('')
         }) 
@@ -53,6 +73,13 @@ const App = () => {
         .remove(id)
 
       setPersons(persons.filter(person => person.id !== id))
+
+      setNotification('Poistettiin henkilö ' + name + ' onnistuneesti')
+      setSuccess(true)
+
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
     }
   }
 
@@ -71,6 +98,7 @@ const App = () => {
   return (
     <div>
       <h2>Puhelinluettelo</h2>
+      <Notification notification={notification} success={success} />
       <Filter condition={condition} handleCondition={handleCondition}/>
       <h2>Lisää uusi</h2>
       <PersonForm addName={addName} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange} />
