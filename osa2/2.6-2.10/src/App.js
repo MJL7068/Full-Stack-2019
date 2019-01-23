@@ -43,6 +43,16 @@ const App = () => {
               setNotification(null)
             }, 5000)
           })
+          .catch(error => {
+            setPersons(persons.filter(person => person.name !== newName))
+            
+            setNotification('Henkilö ' + newName + ' on jo poistettu palvelimelta')
+            setSuccess(false)
+
+            setTimeout(() => {
+              setNotification(null)
+            }, 5000)
+          })
       }
     } else {
       personsService
